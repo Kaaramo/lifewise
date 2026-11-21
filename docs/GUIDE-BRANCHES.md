@@ -35,8 +35,6 @@ git checkout prenom-nom
 | 5. Application web | `said-jadli`, `aymane-hayoun` | Saïd |
 | 6. Application mobile et coordination | `karamo-sylla` | Karamo |
 
-Le travail d'un référent est relu par Karamo.
-
 ## À chaque séance de travail
 
 ```
