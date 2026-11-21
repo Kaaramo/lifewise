@@ -35,7 +35,6 @@ de bout en bout, et assemble le rapport LaTeX et le guide PowerPoint à partir d
 - Le scénario pilote se joue de bout en bout, sans intervention cachée, et la démonstration est filmée.
 - Le rapport compile sans erreur avec XeLaTeX dans le modèle du professeur, sans toucher à sa mise en forme.
 - Le guide PPT suit le modèle DevelopMetrics et couvre les sept points demandés par le professeur.
-- Chaque vendredi, l'avancement des six équipes est relevé.
 
 ## Livrables
 
