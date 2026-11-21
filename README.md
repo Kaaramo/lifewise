@@ -24,7 +24,6 @@
 ![LaTeX](https://img.shields.io/badge/LaTeX-0A0A0B?style=for-the-badge&logo=latex&logoColor=FF7A1A)
 
 ![Dernier commit](https://img.shields.io/github/last-commit/Kaaramo/lifewise?style=flat-square&color=FF7A1A&labelColor=0A0A0B&label=dernier%20commit)
-![Taille](https://img.shields.io/github/repo-size/Kaaramo/lifewise?style=flat-square&color=FF7A1A&labelColor=0A0A0B&label=taille)
 
 </div>
 
