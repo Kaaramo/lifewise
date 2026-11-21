@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Secrets et configuration locale
+.env
+.env.*
+*.key
+
+# Modèles et gros fichiers (à télécharger, jamais à versionner)
+*.gguf
+*.safetensors
+*.pt
+*.onnx
+models/
+
+# LaTeX
+*.aux
+*.log
+*.lof
+*.lot
+*.toc
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.xdv
+
+# Bases locales et systèmes
+*.db
+*.sqlite
+.DS_Store
+Thumbs.db
