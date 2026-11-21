@@ -1,0 +1,73 @@
+\chapter{\textcolor{mycolor}{\textbf{Conception et architecture du système}}}
+\markboth{\chaptername\ \thechapter.\ Conception et architecture du système}{}
+\fancyhf{}
+\fancyhead[L]{\small\itshape\nouppercase{\rightmark}}
+\fancyfoot[L]{\small\itshape\nouppercase{\leftmark}}
+\fancyfoot[R]{\small\itshape\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\vfill
+\begin{flushright}{\Large\bfseries\textcolor{mycolor}{Introduction}}\end{flushright}
+\addcontentsline{toc}{section}{Introduction}
+
+Ce chapitre décrit la solution conçue pour le scénario pilote. Nous présentons d'abord l'architecture générale, la chaîne en sept étapes et les principes communs à toutes les sous-équipes. Nous détaillons ensuite la conception de chaque maillon : le matériel, le contrat d'interface et les données, la chaîne de perception, le moteur de décision et le backend, puis les deux applications.
+
+\clearpage
+
+\section{Architecture générale}
+
+\subsection{La chaîne en sept étapes}
+
+La solution est une chaîne de sept étapes, de la caméra jusqu'à l'historique (figure~\ref{fig:chaine}). Chaque
+étape est tenue par une sous-équipe, et toutes se parlent par le même contrat d'interface.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+      etape/.style={draw=mycolor, fill=mycolor!8, rounded corners=2pt, minimum width=3.1cm, minimum height=1.05cm,
+                    align=center, font=\footnotesize},
+      fleche/.style={-stealth, thick, mycolor}]
+    \node[etape] (a) at (0,0) {Capteurs\\\scriptsize sous-équipe 1};
+    \node[etape] (b) at (4.2,0) {Prétraitement\\\scriptsize sous-équipe 2};
+    \node[etape] (c) at (8.4,0) {Analyse VLM\\\scriptsize sous-équipe 3};
+    \node[etape] (d) at (8.4,-1.8) {Fusion contextuelle\\\scriptsize sous-équipe 4};
+    \node[etape] (e) at (4.2,-1.8) {Décision SLM\\\scriptsize sous-équipe 4};
+    \node[etape] (f) at (0,-1.8) {Notification mobile\\\scriptsize sous-équipe 6};
+    \node[etape] (g) at (4.2,-3.6) {Historique local\\\scriptsize sous-équipes 2, 4, 5};
+    \draw[fleche] (a) -- (b); \draw[fleche] (b) -- (c); \draw[fleche] (c) -- (d);
+    \draw[fleche] (d) -- (e); \draw[fleche] (e) -- (f); \draw[fleche] (f) |- (g);
+  \end{tikzpicture}
+  \caption{La chaîne de traitement de LIFEWISE pour le scénario pilote}
+  \label{fig:chaine}
+\end{figure}
+
+\subsection{Principes communs}
+
+Quatre principes s'imposent à toutes les sous-équipes.
+
+\begin{itemize}
+  \item \textbf{Exécution locale.} Les traitements restent sur l'appareil ; aucune image n'est envoyée à un service distant.
+  \item \textbf{Plusieurs sources d'image.} La caméra du Raspberry Pi, celle du téléphone ou une webcam peuvent alimenter la chaîne sans changer les modules. Le Raspberry Pi est le banc d'essai de l'Edge AI.
+  \item \textbf{Un contrat d'interface commun.} Chaque étape reçoit et produit du JSON au format écrit par la sous-équipe Data ; un changement de format se propose et se relit.
+  \item \textbf{Distinguer le vu de l'interprété.} La vision dit ce qu'elle voit, avec sa confiance ; la décision formule une invitation à vérifier, jamais un constat d'oubli.
+\end{itemize}
+
+
+\input{../01-iot-materiel/rapport/chapitre-3}
+
+\input{../02-data/rapport/chapitre-3}
+
+\input{../03-vision/rapport/chapitre-3}
+
+\input{../04-decision-backend/rapport/chapitre-3}
+
+\input{../05-application-web/rapport/chapitre-3}
+
+\input{../06-application-mobile/rapport/chapitre-3}
+
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+L'architecture est fixée et chaque maillon a ses entrées et ses sorties. Le chapitre suivant présente leur réalisation.

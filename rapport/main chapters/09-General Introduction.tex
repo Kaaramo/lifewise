@@ -1,0 +1,35 @@
+\chapter*{\textcolor{mycolor}{Introduction générale}}
+\addcontentsline{toc}{chapter}{Introduction générale}
+
+Un assistant personnel sait répondre à une question, programmer un rappel ou lire un message. Il ne fait rien de
+tout cela si on ne le lui demande pas. Le problème est que les moments où l'on aurait besoin d'aide sont souvent
+ceux où l'on n'y pense pas : le matin, au moment de partir, quand on referme la porte sans avoir pris son
+portefeuille.
+
+Le projet \textbf{LIFEWISE}, proposé par le Pr. Otman AGHZOUT dans le cadre du module de Computer Vision, part de ce
+constat. Il s'agit de concevoir un assistant contextuel qui observe la situation réelle de la personne et qui
+intervient de lui-même, au moment opportun. Pour cela, le projet associe trois domaines : l'Internet des objets,
+pour capter l'environnement ; la vision par ordinateur, pour comprendre ce que voit une caméra ; et l'intelligence
+artificielle embarquée (Edge AI), pour que tout se passe en local, sur un petit appareil, sans envoyer d'images à un
+service distant.
+
+Le sujet décrit un scénario global, à la maison, au travail et en déplacement. Nous ne le traitons pas en entier.
+L'encadrant a fixé l'objectif de cette année : réussir de bout en bout un scénario pilote, l'assistance à la
+sortie du domicile. Au moment où l'utilisateur part, le système vérifie que les objets qu'il emporte d'habitude,
+le téléphone, les clés et le portefeuille, sont bien là. Si l'un d'eux n'est pas visible, le téléphone l'invite à
+vérifier.
+
+Cette formulation n'est pas un détail. Une caméra ne prouve qu'une chose : un objet n'est pas dans son champ. Elle
+ne prouve pas qu'il a été oublié. Toute la chaîne est donc construite pour distinguer ce qui est observé de ce qui
+est interprété, et l'alerte reste une invitation à vérifier.
+
+La problématique peut se formuler ainsi : \textit{comment concevoir une chaîne locale, de la caméra jusqu'au
+téléphone, qui détecte une situation précise et propose une aide utile au bon moment, sans affirmer plus que ce
+que ses capteurs observent, et en respectant la vie privée de l'utilisateur ?}
+
+Le projet est mené par treize élèves ingénieurs organisés en six sous-équipes, chacune responsable d'un maillon
+de la chaîne. Ce rapport est structuré en cinq chapitres. Le premier présente le contexte général du projet,
+l'analyse des besoins et l'organisation de l'équipe. Le deuxième dresse l'état de l'art des technologies
+mobilisées. Le troisième décrit la conception et l'architecture du système. Le quatrième présente la réalisation
+du prototype, module par module. Le cinquième rend compte des tests, de l'évaluation et de l'analyse des résultats.
+Une conclusion générale et des perspectives terminent le rapport.

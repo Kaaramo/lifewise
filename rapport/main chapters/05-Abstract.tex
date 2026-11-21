@@ -1,0 +1,25 @@
+\chapter*{\textcolor{mycolor}{Abstract}}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Today's personal assistants wait to be asked: the user has to type a question, set a reminder or open an app. The
+moment help would be useful, such as when leaving home, is precisely the moment nobody thinks of asking for it.
+
+\textbf{LIFEWISE} is a context-aware assistant that observes the situation and acts on its own. A small device
+fitted with a camera and sensors (motion, door, light) collects cues about the environment. A lightweight
+vision-language model (VLM) describes what the camera sees; a small language model (SLM), preceded by written
+rules, matches this description against the context (calendar, habits) and decides whether to alert the user on
+their phone. Events are stored in a local SQLite database and can be browsed in a web dashboard. All processing
+stays local, on a Raspberry Pi used as an Edge AI test bench.
+
+The prototype targets one pilot scenario: helping the user when leaving home. As the user walks out, LIFEWISE
+checks that the phone, keys and wallet are being taken and, if one of them is not visible, invites the user to
+check. The alert stays an invitation: a camera can only show that an object is out of view, never that it was
+forgotten.
+
+The project is carried out by thirteen engineering students organised in six sub-teams, one per link of the
+processing chain. This report covers its context, state of the art, design, implementation and evaluation.
+
+\vspace{1cm}
+
+\noindent\textbf{Keywords}: computer vision, Edge AI, Internet of Things, vision-language model, small language
+model, proactive assistance, Raspberry Pi.

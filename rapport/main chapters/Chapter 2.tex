@@ -1,0 +1,38 @@
+\chapter{\textcolor{mycolor}{\textbf{État de l'art et fondements théoriques}}}
+\markboth{\chaptername\ \thechapter.\ État de l'art et fondements théoriques}{}
+\fancyhf{}
+\fancyhead[L]{\small\itshape\nouppercase{\rightmark}}
+\fancyfoot[L]{\small\itshape\nouppercase{\leftmark}}
+\fancyfoot[R]{\small\itshape\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\vfill
+\begin{flushright}{\Large\bfseries\textcolor{mycolor}{Introduction}}\end{flushright}
+\addcontentsline{toc}{section}{Introduction}
+
+Avant de présenter nos choix, nous situons le projet dans son domaine. Ce chapitre passe en revue les assistants personnels et l'informatique contextuelle, puis les quatre familles de technologies sur lesquelles repose la chaîne : l'Internet des objets et l'Edge AI, les données et leur évaluation, la vision par ordinateur et les modèles vision-langage, et les petits modèles de langage. Il se termine par une synthèse qui justifie l'approche retenue.
+
+\clearpage
+
+\section{Assistants personnels et informatique contextuelle}
+
+\aRediger{6 (coordination)}{Présenter les assistants vocaux et applications de rappel existants, leurs limites (commandes explicites, absence de contexte) et les travaux sur l'assistance contextuelle.}
+
+\input{../01-iot-materiel/rapport/chapitre-2}
+
+\input{../02-data/rapport/chapitre-2}
+
+\input{../03-vision/rapport/chapitre-2}
+
+\input{../04-decision-backend/rapport/chapitre-2}
+
+\section{Synthèse et positionnement de LIFEWISE}
+
+\aRediger{6 (coordination)}{Comparer les approches étudiées et justifier les choix de LIFEWISE pour le scénario pilote.}
+
+
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+Ce chapitre a présenté les technologies disponibles pour chaque maillon de la chaîne. Le chapitre suivant décrit comment nous les assemblons dans l'architecture de LIFEWISE.
