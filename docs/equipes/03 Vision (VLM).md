@@ -37,7 +37,7 @@ Elle ne conclut jamais à un oubli : elle dit ce qui est vu, le reste appartient
 
 ## Livrables
 
-- **Code** : dossier `vision/` du dépôt.
+- **Code** : `03-vision/code/` dans le dépôt.
 - **Documents** : tableau comparatif des modèles, décision argumentée, comparaison des montages, analyse des erreurs.
 - **Rapport** : état de l'art (vision par ordinateur, détection d'objets, modèles vision-langage), conception de la chaîne visuelle, réalisation, évaluation (précision, rappel, erreurs, temps d'inférence), annexe des paramètres des modèles.
 - **Guide** : diapositives de la perception visuelle.

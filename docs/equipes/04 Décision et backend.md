@@ -39,7 +39,7 @@ l'historique.
 
 ## Livrables
 
-- **Code** : dossiers `decision/` et `backend/` du dépôt.
+- **Code** : `04-decision-backend/code/` dans le dépôt.
 - **Documents** : règles de validation, comparatif des modèles de langage, documentation de l'API, tableau des mesures.
 - **Rapport** : état de l'art (petits modèles de langage, fusion multimodale), conception (moteur de décision, architecture logicielle, API), réalisation, évaluation des décisions et de la latence, annexes des contrats d'API et du guide d'installation.
 - **Guide** : diapositives de la décision et de l'architecture logicielle.

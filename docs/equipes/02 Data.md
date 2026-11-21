@@ -37,7 +37,7 @@ sans son contrat, les autres ne peuvent pas brancher leurs maillons.
 
 ## Livrables
 
-- **Code** : dossiers `pretraitement/` et `donnees/` du dépôt.
+- **Code** : `02-data/code/` dans le dépôt, et le jeu de scénarios dans `02-data/donnees/`.
 - **Documents** : contrat d'interface, protocole d'annotation, politique de conservation et de consentement.
 - **Rapport** : état de l'art (jeux de données, métriques), conception du contrat et du modèle de données, prétraitement et scénarios, protocole de test, annexe de protection des données.
 - **Guide** : diapositives du contrat d'interface et des données.

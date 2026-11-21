@@ -38,7 +38,7 @@ de bout en bout, et assemble le rapport LaTeX et le guide PowerPoint à partir d
 
 ## Livrables
 
-- **Code** : dossiers `application/` et `docs/` du dépôt.
+- **Code** : `06-application-mobile/code/` dans le dépôt ; `docs/` et l'assemblage dans `rapport/` à la racine.
 - **Documents** : planning, comptes rendus d'avancement, guide de création des branches.
 - **Rapport** : introduction générale, chapitre 1 (contexte, besoins, organisation, Gantt), application mobile, intégration, discussion générale, conclusion, annexe d'organisation.
 - **Guide** : parties 1, 3, 6 et 7, puis l'assemblage de l'ensemble.

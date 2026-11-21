@@ -36,7 +36,7 @@ serveur, demandé par le professeur.
 
 ## Livrables
 
-- **Code** : dossier `dashboard/` du dépôt.
+- **Code** : `05-application-web/code/` dans le dépôt.
 - **Documents** : maquettes, procédure d'accès en ligne.
 - **Rapport** : conception (architecture web, écrans), réalisation du tableau de bord, tests d'usage des écrans.
 - **Guide** : diapositives du tableau de bord.

@@ -38,7 +38,7 @@ webcam en attendant. L'équipe est aussi la référence matérielle du groupe et
 
 ## Livrables
 
-- **Code** : dossier `acquisition/` du dépôt.
+- **Code** : `01-iot-materiel/code/` dans le dépôt.
 - **Documents** : liste du matériel, fiche de choix de la caméra, procédure d'installation, tableau des mesures.
 - **Rapport** : état de l'art (architectures IoT, caméras, Raspberry Pi, Edge AI), conception de l'architecture matérielle, réalisation du montage, mesures matérielles, annexe des fiches techniques et du coût.
 - **Guide** : diapositives du matériel et de l'acquisition.

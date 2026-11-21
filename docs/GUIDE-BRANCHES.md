@@ -58,16 +58,18 @@ c'est bon, ou te répond en commentaire.
 
 ## Où ranger ton travail
 
-| Dossier | Sous-équipe |
+Chaque sous-équipe a son dossier : `01-iot-materiel/`, `02-data/`, `03-vision/`, `04-decision-backend/`,
+`05-application-web/`, `06-application-mobile/`. Dedans, les mêmes sous-dossiers :
+
+| Sous-dossier | Ce qu'on y range |
 |---|---|
-| `acquisition/` | 1. IoT et matériel |
-| `pretraitement/`, `donnees/` | 2. Data |
-| `vision/` | 3. Vision (VLM) |
-| `decision/`, `backend/` | 4. Décision et backend |
-| `dashboard/` | 5. Application web |
-| `application/` | 6. Application mobile |
-| `docs/` | Tous : contrat d'interface, notes techniques, schémas |
-| `rapport/` | Tous : un fichier `.tex` par section, assemblé par la coordination |
+| `code/` | Le code de la sous-équipe |
+| `documents/` | Fiches de choix, tableaux de mesures, notes techniques |
+| `rapport/` | Tes sections du rapport LaTeX, un fichier `.tex` par section |
+| `guide/` | Tes diapositives du guide PowerPoint |
+
+La Data a en plus `02-data/donnees/` pour le jeu de scénarios. À la racine, `docs/` contient ce qui vaut pour
+tous (ce guide, les missions, le contrat d'interface) et `rapport/` le rapport assemblé par la coordination.
 
 On ne touche pas au dossier d'une autre sous-équipe sans passer par son référent. Un changement du format des
 données se propose dans `docs/contrat-interface.md`, par une demande de fusion relue par les équipes concernées.

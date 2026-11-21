@@ -18,15 +18,16 @@ valider ton travail. Les missions de chaque sous-équipe sont dans `docs/equipes
 
 ## Organisation du dépôt
 
-| Dossier | Contenu | Sous-équipe |
-|---|---|---|
-| `acquisition/` | Raspberry Pi, caméra, capteurs | 1. IoT et matériel |
-| `pretraitement/` | Horodatage, filtrage, objet « contexte » | 2. Data |
-| `donnees/` | Scénarios annotés, schéma SQLite | 2. Data |
-| `vision/` | Modèles vision-langage et détection | 3. Vision (VLM) |
-| `decision/` | Règles et petit modèle de langage | 4. Décision et backend |
-| `backend/` | Service qui enchaîne les modules, API | 4. Décision et backend |
-| `dashboard/` | Tableau de bord web | 5. Application web |
-| `application/` | Application mobile | 6. Application mobile et coordination |
-| `docs/` | Guide, contrat d'interface, missions | Tous |
-| `rapport/` | Rapport LaTeX, une section par fichier | Tous |
+Un dossier par sous-équipe, et dans chacun les mêmes sous-dossiers : `code/`, `documents/`, `rapport/` (ses
+sections du rapport), `guide/` (ses diapositives).
+
+| Dossier | Sous-équipe |
+|---|---|
+| `01-iot-materiel/` | 1. IoT et matériel |
+| `02-data/` | 2. Data (avec `donnees/` pour le jeu de scénarios) |
+| `03-vision/` | 3. Vision (VLM) |
+| `04-decision-backend/` | 4. Décision et backend |
+| `05-application-web/` | 5. Application web |
+| `06-application-mobile/` | 6. Application mobile et coordination |
+| `docs/` | Tous : guide des branches, missions, contrat d'interface |
+| `rapport/` | Le rapport assemblé par la coordination |
