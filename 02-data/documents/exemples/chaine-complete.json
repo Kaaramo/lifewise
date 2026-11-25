@@ -1,0 +1,133 @@
+[
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_mesure_porte",
+    "type": "sensor.measurement",
+    "timestamp": "2026-11-27T08:31:05Z",
+    "source": "raspberry",
+    "event_id": "evt_0042",
+    "sensor": "door",
+    "value": "open",
+    "unit": null,
+    "measured_at": "2026-11-27T08:31:05Z"
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_mesure_mouvement",
+    "type": "sensor.measurement",
+    "timestamp": "2026-11-27T08:31:05Z",
+    "source": "raspberry",
+    "event_id": "evt_0042",
+    "sensor": "motion",
+    "value": true,
+    "unit": null,
+    "measured_at": "2026-11-27T08:31:05Z"
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_mesure_luminosite",
+    "type": "sensor.measurement",
+    "timestamp": "2026-11-27T08:31:05Z",
+    "source": "raspberry",
+    "event_id": "evt_0042",
+    "sensor": "luminosity",
+    "value": 180,
+    "unit": "lux",
+    "measured_at": "2026-11-27T08:31:05Z"
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_image_capturee",
+    "type": "image.captured",
+    "timestamp": "2026-11-27T08:31:05Z",
+    "source": "phone",
+    "event_id": "evt_0042",
+    "image_id": "img_0042_raw",
+    "image_path": "02-data/donnees/phone_jour_007.jpg",
+    "captured_at": "2026-11-27T08:31:05Z",
+    "content_type": "image/jpeg",
+    "width": 1280,
+    "height": 960
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_image_selectionnee",
+    "type": "image.selected",
+    "timestamp": "2026-11-27T08:31:06Z",
+    "source": "phone",
+    "event_id": "evt_0042",
+    "image_id": "img_0042_selected",
+    "original_image_id": "img_0042_raw",
+    "image_path": "02-data/donnees/pretraitees/phone_jour_007.jpg",
+    "captured_at": "2026-11-27T08:31:05Z",
+    "content_type": "image/jpeg",
+    "width": 640,
+    "height": 480,
+    "quality": {
+      "usable": true,
+      "blur_score": 142.7,
+      "brightness": 118.2
+    }
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_objets_vus",
+    "type": "vision.objects",
+    "timestamp": "2026-11-27T08:31:07Z",
+    "source": "phone",
+    "event_id": "evt_0042",
+    "image_id": "img_0042_selected",
+    "objects_seen": [
+      {"label": "phone", "confidence": 0.93},
+      {"label": "keys", "confidence": 0.81}
+    ]
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_contexte",
+    "type": "context.updated",
+    "timestamp": "2026-11-27T08:31:07Z",
+    "source": "data",
+    "event_id": "evt_0042",
+    "measurements": [
+      {"measurement_id": "msg_mesure_porte", "source": "raspberry", "sensor": "door", "value": "open", "unit": null, "measured_at": "2026-11-27T08:31:05Z"},
+      {"measurement_id": "msg_mesure_mouvement", "source": "raspberry", "sensor": "motion", "value": true, "unit": null, "measured_at": "2026-11-27T08:31:05Z"},
+      {"measurement_id": "msg_mesure_luminosite", "source": "raspberry", "sensor": "luminosity", "value": 180, "unit": "lux", "measured_at": "2026-11-27T08:31:05Z"}
+    ],
+    "quality": {
+      "sensors_available": {"door": true, "motion": true, "luminosity": true},
+      "measurement_max_age_seconds": 30,
+      "image_usable": true,
+      "selected_image_id": "img_0042_selected",
+      "rejected_images": []
+    },
+    "agenda": [
+      {"id": "rdv_01", "title": "Réunion", "start": "2026-11-27T08:45:00Z", "location": "bureau"}
+    ]
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_decision",
+    "type": "decision.created",
+    "timestamp": "2026-11-27T08:31:08Z",
+    "source": "backend",
+    "event_id": "evt_0042",
+    "context_id": "msg_contexte",
+    "observation_ids": ["msg_objets_vus"],
+    "status": "evaluated",
+    "alert": true,
+    "missing_objects": ["wallet"],
+    "message": "Pensez à vérifier votre portefeuille avant de partir.",
+    "justification": "La porte est ouverte, un mouvement est détecté, le portefeuille attendu n'est pas détecté sur l'image exploitable et une réunion est prévue à 08:45 UTC."
+  },
+  {
+    "schema_version": "0.1.0",
+    "id": "msg_reponse",
+    "type": "user.response",
+    "timestamp": "2026-11-27T08:31:10Z",
+    "source": "mobile",
+    "event_id": "evt_0042",
+    "decision_id": "msg_decision",
+    "action": "remind_5min"
+  }
+]

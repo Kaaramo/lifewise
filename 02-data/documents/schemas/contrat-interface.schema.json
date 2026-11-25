@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LifeWise - contrat d'interface 0.1.0 (proposition)",
+  "description": "Valide un message. Les références entre messages et la fraîcheur des mesures sont vérifiées par les modules.",
+  "oneOf": [
+    {"$ref": "#/$defs/sensorMessage"},
+    {"$ref": "#/$defs/capturedImageMessage"},
+    {"$ref": "#/$defs/selectedImageMessage"},
+    {"$ref": "#/$defs/objectsMessage"},
+    {"$ref": "#/$defs/contextMessage"},
+    {"$ref": "#/$defs/decisionMessage"},
+    {"$ref": "#/$defs/responseMessage"}
+  ],
+  "$defs": {
+    "identifier": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "utcTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+    },
+    "imageSource": {"enum": ["raspberry", "phone", "webcam"]},
+    "sensorSource": {"enum": ["raspberry", "simulator"]},
+    "label": {"enum": ["phone", "keys", "wallet"]},
+    "relativeImagePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z][A-Za-z0-9+.-]*:)(?!.*(?:^|/)\\.\\.(?:/|$))(?=.*\\S)[^\\\\]+$"
+    },
+    "base": {
+      "type": "object",
+      "properties": {
+        "schema_version": {"const": "0.1.0"},
+        "id": {"$ref": "#/$defs/identifier"},
+        "type": {"type": "string"},
+        "timestamp": {"$ref": "#/$defs/utcTimestamp"},
+        "source": {"$ref": "#/$defs/text"},
+        "event_id": {"$ref": "#/$defs/identifier"},
+        "scenario_id": {"$ref": "#/$defs/identifier"}
+      },
+      "required": ["schema_version", "id", "type", "timestamp", "source"]
+    },
+    "sensorFields": {
+      "type": "object",
+      "properties": {
+        "sensor": {"enum": ["door", "motion", "luminosity"]},
+        "value": {"type": ["string", "boolean", "number"]},
+        "unit": {"type": ["string", "null"]},
+        "measured_at": {"$ref": "#/$defs/utcTimestamp"}
+      },
+      "required": ["sensor", "value", "unit", "measured_at"],
+      "oneOf": [
+        {
+          "properties": {
+            "sensor": {"const": "door"},
+            "value": {"enum": ["open", "closed"]},
+            "unit": {"type": "null"}
+          }
+        },
+        {
+          "properties": {
+            "sensor": {"const": "motion"},
+            "value": {"type": "boolean"},
+            "unit": {"type": "null"}
+          }
+        },
+        {
+          "properties": {
+            "sensor": {"const": "luminosity"},
+            "value": {"type": "number", "minimum": 0},
+            "unit": {"const": "lux"}
+          }
+        }
+      ]
+    },
+    "sensorMessage": {
+      "allOf": [
+        {"$ref": "#/$defs/base"},
+        {"$ref": "#/$defs/sensorFields"},
+        {
+          "properties": {
+            "type": {"const": "sensor.measurement"},
+            "source": {"$ref": "#/$defs/sensorSource"}
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "measurementSnapshot": {
+      "allOf": [
+        {"$ref": "#/$defs/sensorFields"},
+        {
+          "properties": {
+            "measurement_id": {"$ref": "#/$defs/identifier"},
+            "source": {"$ref": "#/$defs/sensorSource"}
+          },
+          "required": ["measurement_id", "source"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "imageFields": {
+      "type": "object",
+      "properties": {
+        "source": {"$ref": "#/$defs/imageSource"},
+        "image_id": {"$ref": "#/$defs/identifier"},
+        "image_path": {"$ref": "#/$defs/relativeImagePath"},
+        "captured_at": {"$ref": "#/$defs/utcTimestamp"},
+        "content_type": {"enum": ["image/jpeg", "image/png"]},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      },
+      "required": ["source", "image_id", "image_path", "captured_at", "content_type", "width", "height"]
+    },
+    "capturedImageMessage": {
+      "allOf": [
+        {"$ref": "#/$defs/base"},
+        {"$ref": "#/$defs/imageFields"},
+        {"properties": {"type": {"const": "image.captured"}}}
+      ],
+      "unevaluatedProperties": false
+    },
+    "selectedImageMessage": {
+      "allOf": [
+        {"$ref": "#/$defs/base"},
+        {"$ref": "#/$defs/imageFields"},
+        {
+          "properties": {
+            "type": {"const": "image.selected"},
+            "content_type": {"const": "image/jpeg"},
+            "original_image_id": {"$ref": "#/$defs/identifier"},
+            "quality": {
+              "type": "object",
+              "properties": {
+                "usable": {"const": true},
+                "blur_score": {"type": "number", "minimum": 0},
+                "brightness": {"type": "number", "minimum": 0, "maximum": 255}
+              },
+              "required": ["usable", "blur_score", "brightness"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["event_id", "original_image_id", "quality"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "objectSeen": {
+      "type": "object",
+      "properties": {
+        "label": {"$ref": "#/$defs/label"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "required": ["label", "confidence"],
+      "additionalProperties": false
+    },
+    "objectsMessage": {
+      "allOf": [
+        {"$ref": "#/$defs/base"},
+        {
+          "properties": {
+            "type": {"const": "vision.objects"},
+            "source": {"$ref": "#/$defs/imageSource"},
+            "image_id": {"$ref": "#/$defs/identifier"},
+            "objects_seen": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/objectSeen"},
+              "maxItems": 3,
+              "uniqueItems": true
+            }
+          },
+          "required": ["event_id", "image_id", "objects_seen"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "rejectedImage": {
+      "type": "object",
+      "properties": {
+        "image_id": {"$ref": "#/$defs/identifier"},
+        "source": {"$ref": "#/$defs/imageSource"},
+        "reasons": {
+          "type": "array",
+          "items": {"enum": ["blurred", "too_dark", "invalid_image"]},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": ["image_id", "source", "reasons"],
+      "additionalProperties": false
+    },
+    "contextQuality": {
+      "type": "object",
+      "properties": {
+        "sensors_available": {
+          "type": "object",
+          "properties": {
+            "door": {"type": "boolean"},
+            "motion": {"type": "boolean"},
+            "luminosity": {"type": "boolean"}
+          },
+          "required": ["door", "motion", "luminosity"],
+          "additionalProperties": false
+        },
+        "measurement_max_age_seconds": {"type": "integer", "minimum": 1},
+        "image_usable": {"type": "boolean"},
+        "selected_image_id": {"oneOf": [{"$ref": "#/$defs/identifier"}, {"type": "null"}]},
+        "rejected_images": {"type": "array", "items": {"$ref": "#/$defs/rejectedImage"}}
+      },
+      "required": ["sensors_available", "measurement_max_age_seconds", "image_usable", "selected_image_id", "rejected_images"],
+      "if": {"properties": {"image_usable": {"const": true}}, "required": ["image_usable"]},
+      "then": {"properties": {"selected_image_id": {"$ref": "#/$defs/identifier"}}},
+      "else": {"properties": {"selected_image_id": {"type": "null"}}},
+      "additionalProperties": false
+    },
+    "agendaEvent": {
+      "type": "object",
+      "properties": {
+        "id": {"$ref": "#/$defs/identifier"},
+        "title": {"$ref": "#/$defs/text"},
+        "start": {"$ref": "#/$defs/utcTimestamp"},
+        "location": {"type": ["string", "null"]}
+      },
+      "required": ["id", "title", "start", "location"],
+      "additionalProperties": false
+    },
+    "contextMessage": {
+      "allOf": [
+        {"$ref": "#/$defs/base"},
+        {
+          "properties": {
+            "type": {"const": "context.updated"},
+            "source": {"const": "data"},
+            "measurements": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/measurementSnapshot"},
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "quality": {"$ref": "#/$defs/contextQuality"},
+            "agenda": {"type": "array", "items": {"$ref": "#/$defs/agendaEvent"}}
+          },
+          "required": ["event_id", "measurements", "quality", "agenda"]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "decisionMessage": {
+      "allOf": [
+        {"$ref": "#/$defs/base"},
+        {
+          "properties": {
+            "type": {"const": "decision.created"},
+            "source": {"const": "backend"},
+            "context_id": {"$ref": "#/$defs/identifier"},
+            "observation_ids": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/identifier"},
+              "uniqueItems": true
+            },
+            "status": {"enum": ["evaluated", "insufficient_data"]},
+            "alert": {"type": "boolean"},
+            "missing_objects": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/label"},
+              "uniqueItems": true
+            },
+            "message": {"$ref": "#/$defs/text"},
+            "justification": {"$ref": "#/$defs/text"}
+          },
+          "required": ["event_id", "context_id", "observation_ids", "status", "alert", "missing_objects", "message", "justification"],
+          "allOf": [
+            {
+              "if": {"properties": {"alert": {"const": true}}, "required": ["alert"]},
+              "then": {
+                "properties": {
+                  "status": {"const": "evaluated"},
+                  "missing_objects": {"minItems": 1},
+                  "observation_ids": {"minItems": 1}
+                }
+              },
+              "else": {"properties": {"missing_objects": {"maxItems": 0}}}
+            },
+            {
+              "if": {"properties": {"status": {"const": "insufficient_data"}}, "required": ["status"]},
+              "then": {
+                "properties": {
+                  "alert": {"const": false},
+                  "missing_objects": {"maxItems": 0}
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "responseMessage": {
+      "allOf": [
+        {"$ref": "#/$defs/base"},
+        {
+          "properties": {
+            "type": {"const": "user.response"},
+            "source": {"const": "mobile"},
+            "decision_id": {"$ref": "#/$defs/identifier"},
+            "action": {"enum": ["remind_5min", "ignore"]}
+          },
+          "required": ["event_id", "decision_id", "action"]
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}
